@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1600, initial-scale=0.5" />
+<title>POLOLITOTRABAJOS · Mobile app</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #f0eee9; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  * { box-sizing: border-box; }
+  @keyframes pt-slide-down { from { opacity:0; transform: translateY(-6px); } to { opacity:1; transform: translateY(0); } }
+  @keyframes pt-pulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: 0.85; } }
+  ::-webkit-scrollbar { width: 0; height: 0; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="tokens.js"></script>
+<script src="data.js"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="primitives.jsx"></script>
+<script type="text/babel" src="screens-1.jsx"></script>
+<script type="text/babel" src="screens-2.jsx"></script>
+<script type="text/babel" src="app.jsx"></script>
+
+<script type="text/babel" data-presets="env,react">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "palette": "duo",
+  "role": "cliente",
+  "dark": false
+}/*EDITMODE-END*/;
+
+const PALETTE_LABELS = {
+  naranja: '🔥 Fuego',
+  violeta: '💜 Pololo',
+  duo: '🌅 Atardecer',
+};
+
+function Root() {
+  const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const palette = tweaks.palette;
+  const role = tweaks.role;
+  const dark = tweaks.dark;
+  const theme = window.PT_THEME(palette, dark);
+
+  return (
+    <DesignCanvas>
+      {/* Section 1: Live prototype */}
+      <DCSection id="proto" title="Prototipo interactivo" subtitle="Toca para navegar · usa los Tweaks (esquina inf. derecha) para cambiar paleta, rol y modo oscuro">
+        <DCArtboard id="proto-live" label={`Live · ${role === 'cliente' ? 'Cliente' : 'Maestro'} · ${PALETTE_LABELS[palette]}${dark ? ' · Oscuro' : ''}`} width={420} height={840}>
+          <div style={{ width: '100%', height: '100%', background: '#f0eee9', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
+            <PTApp paletteOverride={palette} roleOverride={role} darkOverride={dark} />
+          </div>
+        </DCArtboard>
+      </DCSection>
+
+      {/* Section 2: Catalog variations */}
+      <DCSection id="catalog" title="Catálogo de Maestros" subtitle="Pestaña 1 · Cliente busca maestro directamente">
+        {makeArtboard({ label: 'Catálogo · Atardecer', palette: 'duo', dark: false, screen: 'catalog', role: 'cliente' })}
+        {makeArtboard({ label: 'Catálogo · Fuego (Naranja)', palette: 'naranja', dark: false, screen: 'catalog', role: 'cliente' })}
+        {makeArtboard({ label: 'Catálogo · Pololo (Violeta)', palette: 'violeta', dark: false, screen: 'catalog', role: 'cliente' })}
+        {makeArtboard({ label: 'Catálogo · Modo oscuro', palette: 'duo', dark: true, screen: 'catalog', role: 'cliente' })}
+      </DCSection>
+
+      {/* Section 3: Maestro detail */}
+      <DCSection id="detail" title="Detalle de Maestro" subtitle="Pantalla de perfil completo · calificaciones, portafolio, CTAs">
+        {makeArtboard({ label: 'Detalle · Juan Carrasco', palette: 'duo', dark: false, screen: 'maestro', role: 'cliente', maestroId: 'juan' })}
+        {makeArtboard({ label: 'Detalle · Naranja', palette: 'naranja', dark: false, screen: 'maestro', role: 'cliente', maestroId: 'don-luis' })}
+        {makeArtboard({ label: 'Detalle · Oscuro', palette: 'violeta', dark: true, screen: 'maestro', role: 'cliente', maestroId: 'patricia' })}
+      </DCSection>
+
+      {/* Section 4: Publish */}
+      <DCSection id="publish" title="Publicar Solicitud" subtitle="Pestaña 2 · Cliente publica una pega · Maestro ve el feed">
+        {makeArtboard({ label: 'Publicar · Cliente', palette: 'duo', dark: false, screen: 'publish', role: 'cliente' })}
+        {makeArtboard({ label: 'Feed · Maestro', palette: 'duo', dark: false, screen: 'publish', role: 'maestro' })}
+        {makeArtboard({ label: 'Feed · Naranja Maestro', palette: 'naranja', dark: false, screen: 'publish', role: 'maestro' })}
+      </DCSection>
+
+      {/* Section 5: Profile */}
+      <DCSection id="profile" title="Mi Perfil" subtitle="Pestaña 4 · Vistas distintas para Cliente y Maestro">
+        {makeArtboard({ label: 'Perfil Maestro', palette: 'duo', dark: false, screen: 'profile', role: 'maestro' })}
+        {makeArtboard({ label: 'Perfil Cliente', palette: 'duo', dark: false, screen: 'profile', role: 'cliente' })}
+        {makeArtboard({ label: 'Perfil Maestro · Naranja', palette: 'naranja', dark: false, screen: 'profile', role: 'maestro' })}
+        {makeArtboard({ label: 'Perfil Maestro · Oscuro', palette: 'violeta', dark: true, screen: 'profile', role: 'maestro' })}
+      </DCSection>
+
+      {/* Section 6: Flow contact + chat */}
+      <DCSection id="flow" title="Flujo de Contacto" subtitle="Cliente presiona Contactar → Maestro recibe notificación → Atiende → Se abre chat">
+        {makeArtboard({ label: '1. Cliente presiona Contactar', palette: 'duo', dark: false, screen: 'flow-1' })}
+        {makeArtboard({ label: '2. Maestro recibe notificación', palette: 'duo', dark: false, screen: 'flow-2' })}
+        {makeArtboard({ label: '3. Chat abierto · En negociación', palette: 'duo', dark: false, screen: 'flow-3' })}
+        {makeArtboard({ label: '4. Trabajo completado · calificar', palette: 'duo', dark: false, screen: 'flow-4' })}
+      </DCSection>
+
+      {/* Section 7: Notifications */}
+      <DCSection id="notifs" title="Sistema de Notificaciones" subtitle="Toasts y modales · cliente y maestro">
+        <DCArtboard id="notif-stack" label="Stack de notificaciones" width={420} height={620}>
+          <NotifStack theme={theme} />
+        </DCArtboard>
+        <DCArtboard id="notif-light" label="Versión clara" width={420} height={620}>
+          <NotifStack theme={window.PT_THEME('naranja', false)} />
+        </DCArtboard>
+      </DCSection>
+
+      {/* Tweaks panel */}
+      <TweaksPanel title="Tweaks" defaultPosition="bottom-right">
+        <TweakSection title="Paleta de color">
+          <TweakRadio label="Gradiente" value={palette} onChange={(v) => setTweak('palette', v)}
+            options={[
+              { value: 'duo', label: '🌅 Atardecer' },
+              { value: 'naranja', label: '🔥 Fuego' },
+              { value: 'violeta', label: '💜 Pololo' },
+            ]} />
+        </TweakSection>
+        <TweakSection title="Rol del usuario">
+          <TweakRadio label="¿Quién navega?" value={role} onChange={(v) => setTweak('role', v)}
+            options={[
+              { value: 'cliente', label: 'Cliente' },
+              { value: 'maestro', label: 'Maestro' },
+            ]} />
+        </TweakSection>
+        <TweakSection title="Apariencia">
+          <TweakToggle label="Modo oscuro" value={dark} onChange={(v) => setTweak('dark', v)} />
+        </TweakSection>
+      </TweaksPanel>
+    </DesignCanvas>
+  );
+}
+
+// Helper that returns a real DCArtboard element directly (so DesignCanvas can see it)
+function makeArtboard({ label, palette, dark, screen, role, maestroId }) {
+  const theme = window.PT_THEME(palette, dark);
+  const id = `${screen}-${palette}-${dark ? 'd' : 'l'}-${role || 'x'}-${maestroId || 'x'}`;
+  return (
+    <DCArtboard key={id} id={id} label={label} width={420} height={840}>
+      <div style={{ width: '100%', height: '100%', background: theme.bgAlt, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
+        <ScreenStandalone theme={theme} screen={screen} role={role} maestroId={maestroId} />
+      </div>
+    </DCArtboard>
+  );
+}
+
+// Renders a phone with a specific screen pre-set, isolated state per artboard
+function ScreenStandalone({ theme, screen, role, maestroId }) {
+  const [tab, setTab] = React.useState(
+    screen === 'catalog' || screen === 'maestro' ? 'catalog' :
+    screen === 'publish' ? 'publish' :
+    screen === 'profile' ? 'profile' : 'catalog'
+  );
+  const [mid, setMid] = React.useState(screen === 'maestro' ? maestroId : null);
+  const [showContactToast, setShowContactToast] = React.useState(screen === 'flow-2');
+
+  let content;
+  if (screen === 'flow-3' || screen === 'flow-4') {
+    const fakeChat = {
+      id: 'c1', nombre: 'Don Luis Muñoz', label: 'foto · luis',
+      status: screen === 'flow-4' ? 'Completado' : 'En negociación',
+      color: screen === 'flow-4' ? theme.green : theme.primary,
+    };
+    return (
+      <PTPhone theme={theme}>
+        <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+          <ChatDetail theme={theme} chat={fakeChat} onBack={() => {}} />
+        </div>
+      </PTPhone>
+    );
+  }
+  if (mid) content = <ScreenMaestroDetail theme={theme} maestroId={mid} onBack={() => setMid(null)} />;
+  else if (tab === 'catalog') content = <ScreenCatalog theme={theme} onOpenMaestro={(id) => setMid(id)} role={role} />;
+  else if (tab === 'publish') content = <ScreenPublish theme={theme} role={role} onPublish={() => {}} />;
+  else if (tab === 'profile') content = role === 'maestro' ? <ScreenProfileMaestro theme={theme} /> : <ScreenProfileCliente theme={theme} />;
+
+  return (
+    <PTPhone theme={theme}>
+      <div style={{ flex: 1, position: 'relative', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+        <div style={{ flex: 1, overflow: 'hidden', position: 'relative' }}>{content}</div>
+        {(screen === 'flow-1') && (
+          <div style={{ position: 'absolute', top: 12, left: 12, right: 12, zIndex: 50 }}>
+            <PTToast theme={theme} kind="info" icon="check-circle"
+              title="Solicitud enviada a Juan ✅"
+              body="Te avisaremos cuando responda" />
+          </div>
+        )}
+        {showContactToast && (
+          <div style={{ position: 'absolute', top: 12, left: 12, right: 12, zIndex: 50 }}>
+            <ContactRequestToast theme={theme} onAccept={() => {}} />
+          </div>
+        )}
+      </div>
+      {!mid && <PTBottomNav theme={theme} current={tab} onTab={setTab} />}
+    </PTPhone>
+  );
+}
+
+function NotifStack({ theme }) {
+  return (
+    <div style={{
+      width: '100%', height: '100%', background: theme.bgAlt, padding: 20,
+      display: 'flex', flexDirection: 'column', gap: 10, fontFamily: window.PT_FONT.body,
+      overflow: 'auto',
+    }}>
+      <div style={{ fontSize: 11, fontWeight: 800, color: theme.inkMuted, textTransform: 'uppercase', letterSpacing: 0.6, marginBottom: 2 }}>Cliente recibe</div>
+      <PTToast theme={theme} kind="success" icon="check-circle" title="Juan aceptó tu contacto" body="Pueden chatear ahora" />
+      <PTToast theme={theme} kind="info" icon="chat" title="Juan te envió un mensaje" body="«Llego a las 3 entonces»" />
+      <PTToast theme={theme} kind="info" icon="star" title="¿Listo para calificar?" body="Cuéntanos cómo fue tu pololito con don Luis" />
+
+      <div style={{ fontSize: 11, fontWeight: 800, color: theme.inkMuted, textTransform: 'uppercase', letterSpacing: 0.6, marginTop: 14, marginBottom: 2 }}>Maestro recibe</div>
+      <ContactRequestToast theme={theme} onAccept={() => {}} />
+      <PTToast theme={theme} kind="urgent" icon="zap" title="Nueva solicitud URGENTE en tu zona" body="Gásfiter · Antofagasta Centro · hace 2 min" />
+      <PTToast theme={theme} kind="info" icon="chat" title="Tienes un nuevo mensaje" body="María: ¿podrías traer también..." />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<Root />);
+</script>
+
+</body>
+</html>

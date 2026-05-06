@@ -1,0 +1,61 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+.next/
+.expo/
+android/
+ios/
+web-build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Expo
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+
+# Turbo
+.turbo/
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+
+# Supabase
+supabase/.temp/
+
+.vercel/
+
+# Mobile build artifacts
+apps/mobile/dist-web*/
+apps/mobile/dist/
+
+# IDE caches
+*.tsbuildinfo
+.claude/
+
+# Plan files (locales)
+.claude/plans/

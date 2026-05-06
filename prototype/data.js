@@ -1,0 +1,90 @@
+// POLOLITOTRABAJOS — Mock data
+window.PT_DATA = {
+  maestros: [
+    {
+      id: 'juan', nombre: 'Juan Carrasco', oficio: 'Electricista',
+      rating: 4.9, reviews: 142, zona: 'Calama, Antofagasta',
+      bio: 'Instalaciones, reparaciones y mantención. Trabajo limpio y al tiro.',
+      experiencia: 12, disponible: true, telefono: '+56 9 8765 4321', telefonoPublico: true,
+      especialidades: ['Electricidad', 'Iluminación', 'Tableros'],
+      desglose: { calidad: 4.9, puntualidad: 4.8, comunicacion: 4.9, precio: 4.7 },
+      portfolio: ['tablero eléctrico', 'cableado', 'instalación lámpara', 'enchufes', 'protector', 'luminarias'],
+      desde: 'enero 2022',
+    },
+    {
+      id: 'don-luis', nombre: 'Don Luis Muñoz', oficio: 'Gásfiter',
+      rating: 4.8, reviews: 98, zona: 'Antofagasta Centro',
+      bio: 'Califonts, cañerías, baños. Voy a domicilio sin costo de visita.',
+      experiencia: 18, disponible: true, telefono: '+56 9 7654 3210', telefonoPublico: true,
+      especialidades: ['Gasfitería', 'Plomería', 'Califont'],
+      desglose: { calidad: 4.8, puntualidad: 4.9, comunicacion: 4.6, precio: 4.8 },
+      portfolio: ['cañería', 'baño', 'califont', 'lavaplatos'],
+      desde: 'marzo 2020',
+    },
+    {
+      id: 'patricia', nombre: 'Patricia Soto', oficio: 'Maestra Pintora',
+      rating: 5.0, reviews: 67, zona: 'Mejillones',
+      bio: 'Pintura interior, exterior, esmaltes. Materiales propios o tuyos, cachái.',
+      experiencia: 8, disponible: false, telefono: '+56 9 6543 2109', telefonoPublico: false,
+      especialidades: ['Pintura', 'Estuco', 'Decoración'],
+      desglose: { calidad: 5.0, puntualidad: 4.9, comunicacion: 5.0, precio: 4.6 },
+      portfolio: ['fachada', 'living', 'dormitorio', 'esmalte'],
+      desde: 'septiembre 2022',
+    },
+    {
+      id: 'rodrigo', nombre: 'Rodrigo Vargas', oficio: 'Carpintero',
+      rating: 4.7, reviews: 53, zona: 'Tocopilla',
+      bio: 'Muebles a medida, terrazas, ampliaciones. Cotizamos sin compromiso.',
+      experiencia: 15, disponible: true, telefono: '+56 9 5432 1098', telefonoPublico: true,
+      especialidades: ['Carpintería', 'Construcción', 'Muebles'],
+      desglose: { calidad: 4.8, puntualidad: 4.6, comunicacion: 4.7, precio: 4.7 },
+      portfolio: ['terraza', 'closet', 'mesa', 'puerta', 'pérgola'],
+      desde: 'mayo 2021',
+    },
+    {
+      id: 'carla', nombre: 'Carla Henríquez', oficio: 'Maestra Constructora',
+      rating: 4.9, reviews: 89, zona: 'Calama, El Loa',
+      bio: 'Ampliaciones, segundos pisos, refacciones. Equipo propio.',
+      experiencia: 20, disponible: true, telefono: '+56 9 4321 0987', telefonoPublico: false,
+      especialidades: ['Construcción', 'Albañilería', 'Refacciones'],
+      desglose: { calidad: 4.9, puntualidad: 4.8, comunicacion: 4.9, precio: 4.5 },
+      portfolio: ['ampliación', 'segundo piso', 'cimientos', 'muro'],
+      desde: 'agosto 2019',
+    },
+  ],
+
+  publicaciones: [
+    {
+      id: 'p1', autor: 'María González', autorLabel: 'foto cliente',
+      titulo: 'Necesito gásfiter urgente al tiro 🚨',
+      descripcion: 'Mi califont está perdiendo agua y se moja toda la cocina. Necesito que vengan hoy si se puede, soy del centro de Antofagasta.',
+      especialidad: 'Gasfitería', ubicacion: 'Antofagasta Centro',
+      urgente: true, hace: 'hace 35 min', fotos: 2, contactos: 4,
+    },
+    {
+      id: 'p2', autor: 'Cristián Rojas', autorLabel: 'foto cliente',
+      titulo: 'Quiero ampliar el segundo piso',
+      descripcion: 'Tengo casa de 1 piso en Calama y quiero subir un dormitorio + baño arriba. Busco maestro con experiencia y referencias, sin apuro.',
+      especialidad: 'Construcción', ubicacion: 'Calama',
+      urgente: false, hace: 'hace 2 horas', fotos: 4, contactos: 11,
+    },
+    {
+      id: 'p3', autor: 'Javiera Pizarro', autorLabel: 'foto cliente',
+      titulo: 'Pintura living y comedor',
+      descripcion: 'Living + comedor, unos 28m². Tengo la pintura comprada, solo necesito mano de obra para este finde.',
+      especialidad: 'Pintura', ubicacion: 'Mejillones',
+      urgente: false, hace: 'hace 5 horas', fotos: 1, contactos: 7,
+    },
+  ],
+
+  cliente: {
+    nombre: 'María González', apodo: 'María', telefono: '+56 9 1234 5678',
+    email: 'maria.gonzalez@gmail.com',
+    direcciones: [
+      { label: 'Casa', detalle: 'Av. Argentina 2350, Antofagasta' },
+      { label: 'Trabajo', detalle: 'Edif. Costa 1840, of. 502' },
+    ],
+    historial: 7,
+    rating: 4.9, reviewsRecibidos: 6,
+  },
+};

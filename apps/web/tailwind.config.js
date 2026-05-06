@@ -1,0 +1,51 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './app/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+  ],
+  theme: {
+    extend: {
+      colors: {
+        ink: '#1A1816',
+        'ink-muted': '#8C8579',
+        'ink-soft': '#A69F95',
+        surface: '#FFFFFF',
+        bg: '#FAFAF8',
+        'bg-alt': '#F5F3EE',
+        border: '#E8E4DC',
+        'border-strong': '#D4CFC6',
+        cream: '#FAFAF8',
+        cream2: '#F7F7F9',
+        cream3: '#FAF9F5',
+        orange: '#FF6B35',
+        orange2: '#F97316',
+        amber: '#F59E0B',
+        amber2: '#FBBF24',
+        violet: '#7C3AED',
+        violet2: '#5B21B6',
+        deep: '#1E0E40',
+        deeper: '#0F0B1A',
+        phoneBlk: '#1A1816',
+        emerald: '#10B981',
+        lavender: '#EDE4FE',
+        lavender2: '#EDE9FE',
+        divider: '#E8E6EF',
+        primary: '#9333EA',
+        'primary-soft': '#F3EAFD',
+        'primary-deep': '#6B21A8',
+        green: '#22C55E',
+        'green-soft': '#ECFDF5',
+        red: '#EF4444',
+        'red-soft': '#FEF2F2',
+      },
+      fontFamily: {
+        sans: ['var(--font-jakarta)', 'system-ui', 'sans-serif'],
+      },
+      borderRadius: {
+        '4xl': '2rem',
+      },
+    },
+  },
+  plugins: [],
+};

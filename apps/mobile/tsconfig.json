@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-native",
+    "lib": ["ES2022"],
+    "moduleResolution": "bundler",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@pololitotrabajos/shared": ["../../packages/shared/src"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", "index.ts", "nativewind-env.d.ts"],
+  "exclude": ["node_modules"]
+}
