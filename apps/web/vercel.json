@@ -1,7 +1,0 @@
-{
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "cd ../.. && pnpm install --frozen-lockfile=false && pnpm --filter web build",
-  "installCommand": "echo 'Skipping default install (handled in buildCommand)'",
-  "framework": "nextjs",
-  "outputDirectory": ".next"
-}
